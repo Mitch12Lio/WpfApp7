@@ -1,11 +1,14 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using System.Xml.Linq;
 using WpfApp7.Models;
 using WpfApp7.MVVM;
 
@@ -31,18 +34,15 @@ namespace WpfApp7.ViewModels
     //    }
     //}
 
-    public abstract class CipherViewModel : ObservableObject
+    public abstract class CipherViewModel : ObservableObject,INotifyDataErrorInfo
     {
-        TroveViewModel troveVM;
-        protected CipherViewModel(TroveViewModel troveVM)
-        {
-            int x = 0;
-            this.troveVM = troveVM;
-        }
+       
         protected CipherViewModel()
         {
-            
+            int x = 0;
+           
         }
+     
 
         #region Properties
 
@@ -74,11 +74,31 @@ namespace WpfApp7.ViewModels
             }
         }
 
-        [Required]
+
         public virtual String Answer { get; set; }
 
-        [Required]
+        //[Required(ErrorMessage = "Answer is Required")]
+        //public virtual String Answer
+        //{
+        //    get
+        //    {
+        //        return answer;
+        //    }
+        //    set
+        //    {
+
+        //        answer = value;
+        //        Validate(nameof(Answer), value);
+        //        //OnPropertyChanged(nameof(Answer));
+
+        //    }
+        //}
+
+
+        
         private String hint = String.Empty;
+
+        [Required(ErrorMessage = "Cipher is Required")]
         public String Hint
         {
             get
@@ -89,7 +109,7 @@ namespace WpfApp7.ViewModels
             {
 
                 hint = value;
-                //GetAssociatedLetter(value);
+                //Validate(nameof(Hint), value);
                 OnPropertyChanged(nameof(Hint));
 
             }
@@ -99,46 +119,43 @@ namespace WpfApp7.ViewModels
 
         public virtual CipherLocation Location { get; set; }
 
-        //private String answer = String.Empty;
-        //public String Answer
-        //{
-        //    get
-        //    {
-        //        return answer;
-        //    }
-        //    set
-        //    {
+        #endregion
 
-        //        answer = value;
-        //        //GetAssociatedLetter(value);
-        //        OnPropertyChanged(nameof(Answer));
+        #region Validation
 
-        //    }
-        //}
+        Dictionary<string, List<string>> Errors = new Dictionary<string, List<string>>();
+        public bool HasErrors => Errors.Count > 0;
 
-        //private String cipherType = "Atbash";
-        //public String CipherType
-        //{
-        //    get
-        //    {
-        //        return cipherType;
-        //    }
-        //    set
-        //    {
-        //        cipherType = value;
-        //        OnPropertyChanged(nameof(CipherType));
-        //    }
-        //}
+        public event EventHandler<DataErrorsChangedEventArgs>? ErrorsChanged;
+        public IEnumerable GetErrors(string? propertyName)
+        {
+            if (Errors.ContainsKey(propertyName))
+            {
+                return Errors[propertyName];
+            }
+            else { return Enumerable.Empty<string>(); }
+        }
+
+        public void Validate(string propertyName, object propertyValue)
+        {
+            var results = new List<ValidationResult>();
+            Validator.TryValidateProperty(propertyValue, new ValidationContext(this) { MemberName = propertyName }, results);
+            if (results.Any())
+            {
+                Errors.Add(propertyName, results.Select(r => r.ErrorMessage).ToList());
+                ErrorsChanged?.Invoke(this, new DataErrorsChangedEventArgs(propertyName));
+            }
+            else
+            {
+                Errors.Remove(propertyName);
+                ErrorsChanged?.Invoke(this, new DataErrorsChangedEventArgs(propertyName));
+            }
+
+            //SubmitCommand.RaiseCanExecuteChanged();
+        }
 
         #endregion
 
-
-        //ICipherCryptograph? iCipherCryptograph;
-
-        //public void performCrypto() 
-        //{
-        //    iCipherCryptograph?.Encrypt();
-        //}
 
     }
 }

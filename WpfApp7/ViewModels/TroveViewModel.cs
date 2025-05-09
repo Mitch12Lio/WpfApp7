@@ -347,7 +347,7 @@ namespace WpfApp7.ViewModels
             Ciphers.Add(newCipher);
 
             viewModel.Answer = string.Empty;
-            viewModel.Hint = string.Empty;
+            //viewModel.Hint = string.Empty;
             SelectedLocation = null;
             SelectedEggColour = null;
             CountCiphers();

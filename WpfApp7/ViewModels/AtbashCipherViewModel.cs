@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -30,6 +31,8 @@ namespace WpfApp7.ViewModels
         }
 
         private String answer = String.Empty;
+
+        [Required(ErrorMessage = "Answer is Required")]
         public override String Answer
         {
             get
@@ -39,6 +42,7 @@ namespace WpfApp7.ViewModels
             set
             {
                 answer = value;
+                //Validate(nameof(Answer), value);
                 GetAssociatedLetter(value);
                 OnPropertyChanged(nameof(Answer));
             }

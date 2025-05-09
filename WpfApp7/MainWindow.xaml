@@ -304,10 +304,12 @@
                                             <StackPanel Grid.Column="0" Grid.Row="0">
                                                 <Label Content="Answer"></Label>
                                                 <!--<TextBox Text="{Binding TroveVM.AtbashVM.Answer,UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnDataErrors=True}"></TextBox>-->
-                                                <TextBox Text="{Binding TroveVM.AtbashVM.Answer,UpdateSourceTrigger=PropertyChanged}"></TextBox>
-                                                <Label Content="Cipher"></Label>
+                                                <TextBox Text="{Binding TroveVM.AtbashVM.Answer,UpdateSourceTrigger=PropertyChanged}" ToolTip="{Binding RelativeSource={RelativeSource Mode=Self},Path=(Validation.Errors)[0].ErrorContent }"></TextBox>
                                                 
-                                                <TextBox Text="{Binding TroveVM.AtbashVM.Hint}"></TextBox>
+                                                <Label Content="Cipher"></Label>
+                                                <TextBox x:Name="HintTextbox" Text="{Binding TroveVM.AtbashVM.Hint,UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                                                <Label Content="{Binding ElementName=HintTextbox,Path=(Validation.Errors)[0].ErrorContent}" Foreground="Red"></Label>
+
                                                 <Grid>
                                                     <Grid.ColumnDefinitions>
                                                         <ColumnDefinition Width="*" />
