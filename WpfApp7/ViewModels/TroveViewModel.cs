@@ -1,9 +1,6 @@
 ﻿using System;
 using System.CodeDom;
-using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
 using System.Data;
 using System.Linq;
 using System.Security.Cryptography;
@@ -16,7 +13,7 @@ using WpfApp7.MVVM;
 
 namespace WpfApp7.ViewModels
 {
-    public class TroveViewModel : ObservableObject, INotifyDataErrorInfo
+    public class TroveViewModel : ObservableObject
     {
         public AtbashCipherViewModel AtbashVM { get; private set; }
         public MorseCipherViewModel MorseVM { get; private set; }
@@ -233,9 +230,6 @@ namespace WpfApp7.ViewModels
             PolybiusVM = new PolybiusCipherViewModel();
             FillCipherLocations();
             FillEggColours();
-
-            AddPlusValidateAtbashCommand = new ActionCommand(AddPlusValidateAtbash, CanAdd);
-
         }
 
         #region Trove
@@ -264,9 +258,10 @@ namespace WpfApp7.ViewModels
                     IsPolybiusTabSelected = true;
                     currentVM = PolybiusVM;
                     //ViewLogic(selectedCipher, PolybiusVM);
-                }
+                }                
                 ViewLogic(selectedCipher, currentVM);
-
+                SelectedLocation = selectedCipher.CipherLocation;
+                SelectedEggColour = selectedCipher.EggColour;
             }
             else
             {
@@ -296,36 +291,28 @@ namespace WpfApp7.ViewModels
             cipherVM.Hint = selectedCipher.Hint;
             cipherVM.VisibilityAddButton = Utilities.VisibilityTypes.Hidden.ToString();
             cipherVM.VisibilityUpdateButton = Utilities.VisibilityTypes.Visible.ToString();
-            SelectedLocation = selectedCipher.CipherLocation;
-            SelectedEggColour = selectedCipher.EggColour;
 
         }
-
+      
         public void PrintCipherList(string path)
         {
-            try
+            string dateGuid = DateTime.Now.ToString("yyyy.MM.dd.HH.mm.ss.ffff");
+            using (System.IO.StreamWriter file4 = new System.IO.StreamWriter(path, true))
             {
-                using (System.IO.StreamWriter file4 = new System.IO.StreamWriter(path, true))
+                foreach (var cipher in Ciphers)
                 {
-                    foreach (var cipher in Ciphers)
+                    file4.WriteLine(Environment.NewLine);
+                    file4.WriteLine(cipher.Hint);
+                    file4.WriteLine(Environment.NewLine);
+                    if (cipher.CipherLocation != null)
                     {
+                        file4.WriteLine(cipher.CipherLocation.Location);
                         file4.WriteLine(Environment.NewLine);
-                        file4.WriteLine(cipher.Hint);
-                        file4.WriteLine(Environment.NewLine);
-                        if (cipher.CipherLocation != null)
-                        {
-                            file4.WriteLine(cipher.CipherLocation.Location);
-                            file4.WriteLine(Environment.NewLine);
-                        }
-                        file4.WriteLine(cipher.Answer);
-                        file4.WriteLine(Environment.NewLine);
-                        file4.WriteLine(@"-----------------------");
                     }
+                    file4.WriteLine(cipher.Answer);
+                    file4.WriteLine(Environment.NewLine);
+                    file4.WriteLine(@"-----------------------");
                 }
-            }
-            catch (Exception)
-            {
-                throw;
             }
         }
         public void Remove()
@@ -366,22 +353,6 @@ namespace WpfApp7.ViewModels
             CountCiphers();
 
         }
-        public ActionCommand AddPlusValidateAtbashCommand
-        {
-            get; set;
-        }
-        public void AddPlusValidateAtbash(object obj)
-        {
-            int x = 0;
-        }
-
-        private bool CanAdd(object obj)
-        {
-            bool good2Go = Validator.TryValidateObject(AtbashVM, new ValidationContext(AtbashVM), null);
-            //AddPlusValidateAtbashCommand.RaiseCanExecuteChanged();
-            return good2Go;
-
-        }
 
         private void Update(Cipher cipher, CipherViewModel viewModel)
         {
@@ -389,7 +360,7 @@ namespace WpfApp7.ViewModels
             cipher.Hint = viewModel.Hint;
             cipher.CipherType = viewModel.CipherType;
             cipher.CipherLocation = SelectedLocation;
-            cipher.EggColour = SelectedEggColour;
+            cipher.EggColour= SelectedEggColour;
 
         }
 
@@ -494,36 +465,7 @@ namespace WpfApp7.ViewModels
 
 
         #endregion
-        Dictionary<string, List<string>> Errors = new Dictionary<string, List<string>>();
-        public bool HasErrors => Errors.Count > 0;
 
-        public event EventHandler<DataErrorsChangedEventArgs>? ErrorsChanged;
-        public IEnumerable GetErrors(string? propertyName)
-        {
-            if (Errors.ContainsKey(propertyName))
-            {
-                return Errors[propertyName];
-            }
-            else { return Enumerable.Empty<string>(); }
-        }
-
-        public void Validate(string propertyName, object propertyValue)
-        {
-            var results = new List<ValidationResult>();
-            Validator.TryValidateProperty(propertyValue, new ValidationContext(this) { MemberName = propertyName }, results);
-            if (results.Any())
-            {
-                Errors.Add(propertyName, results.Select(r => r.ErrorMessage).ToList());
-                ErrorsChanged?.Invoke(this, new DataErrorsChangedEventArgs(propertyName));
-            }
-            else
-            {
-                Errors.Remove(propertyName);
-                ErrorsChanged?.Invoke(this, new DataErrorsChangedEventArgs(propertyName));
-            }
-
-            AddPlusValidateAtbashCommand.RaiseCanExecuteChanged();
-        }
 
     }
 }

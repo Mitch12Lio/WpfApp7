@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -31,8 +30,6 @@ namespace WpfApp7.ViewModels
         }
 
         private String answer = String.Empty;
-
-        [Required(ErrorMessage = "Answer is Required")]
         public override String Answer
         {
             get
@@ -42,11 +39,8 @@ namespace WpfApp7.ViewModels
             set
             {
                 answer = value;
-                
                 GetAssociatedLetter(value);
-                Validate(nameof(Answer), value);
-                //OnPropertyChanged(nameof(Answer));
-               
+                OnPropertyChanged(nameof(Answer));
             }
         }
 
@@ -96,9 +90,8 @@ namespace WpfApp7.ViewModels
         public AtbashCipherViewModel()
         {
             AtbashDictionary = Utilities.Algorithms.CreateAtbashDictionary();
-            //VisibilityAddButton = Utilities.VisibilityTypes.Visible.ToString();
-            //VisibilityUpdateButton = Utilities.VisibilityTypes.Hidden.ToString();
-            int u = 0;
+            VisibilityAddButton = Utilities.VisibilityTypes.Visible.ToString();
+            VisibilityUpdateButton = Utilities.VisibilityTypes.Hidden.ToString();
         }
 
         #region Methods

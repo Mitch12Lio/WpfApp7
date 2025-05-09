@@ -15,8 +15,9 @@ namespace WpfApp7.ViewModels
     public class MasterViewModel:ObservableObject
     {
         public TroveViewModel TroveVM { get; private set; }
-        
-        
+        //public AtbashCipherViewModel AtbashVM { get; private set; }
+
+
         #region Global Properties       
 
         private string globalLogLocation = Properties.MasterVM.Default.GlobalLogLocation;
@@ -60,6 +61,7 @@ namespace WpfApp7.ViewModels
         public MasterViewModel()
         {
             TroveVM = new TroveViewModel();
+            //AtbashVM = new AtbashCipherViewModel(TroveVM);
 
             SetSaveCommand = new RelayCommand(SetSave, param => true);
             SetFileCommand = new RelayCommand(SetFile, param => true);
@@ -133,24 +135,7 @@ namespace WpfApp7.ViewModels
 
         #endregion
 
-        #region Atbash
-
-        //public ActionCommand AddPlusValidateAtbashCommand
-        //{
-        //    get;set;
-        //}
-        //public void AddPlusValidateAtbash(object obj)
-        //{
-        //    TroveVM.AddPlusValidateAtbash();
-        //}
-
-        //private bool CanAdd(object obj) 
-        //{
-        //    bool good2Go = Validator.TryValidateObject(TroveVM.AtbashVM, new ValidationContext(TroveVM.AtbashVM), null);
-        //    //AddPlusValidateAtbashCommand.RaiseCanExecuteChanged();
-        //    return true;
-            
-        //}
+        #region Atbash       
 
         private ICommand? addAtbashCommand;
         public ICommand AddAtbashCommand
@@ -167,7 +152,7 @@ namespace WpfApp7.ViewModels
         public void AddAtbash()
         {
             TroveVM.AddAtbash();
-        }    
+        }
 
         private ICommand? updateAtbashCommand;
         public ICommand UpdateAtbashCommand
