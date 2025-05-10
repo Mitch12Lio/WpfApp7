@@ -242,25 +242,33 @@ namespace WpfApp7.ViewModels
             cipherVM.VisibilityUpdateButton = Utilities.VisibilityTypes.Visible.ToString();
         }
 
-        public void PrintCipherList(string path)
+        public string PrintCipherList(string path)
         {
-            string dateGuid = DateTime.Now.ToString("yyyy.MM.dd.HH.mm.ss.ffff");
-            using (System.IO.StreamWriter file4 = new System.IO.StreamWriter(path, true))
+            if (Ciphers.Count > 0)
             {
-                foreach (var cipher in Ciphers)
+                string dateGuid = DateTime.Now.ToString("yyyy.MM.dd.HH.mm.ss.ffff");
+                using (System.IO.StreamWriter file4 = new System.IO.StreamWriter(path, true))
                 {
-                    file4.WriteLine(Environment.NewLine);
-                    file4.WriteLine(cipher.Hint);
-                    file4.WriteLine(Environment.NewLine);
-                    if (cipher.CipherLocation != null)
+                    foreach (var cipher in Ciphers)
                     {
-                        file4.WriteLine(cipher.CipherLocation.Location);
                         file4.WriteLine(Environment.NewLine);
+                        file4.WriteLine(cipher.Hint);
+                        file4.WriteLine(Environment.NewLine);
+                        if (cipher.CipherLocation != null)
+                        {
+                            file4.WriteLine(cipher.CipherLocation.Location);
+                            file4.WriteLine(Environment.NewLine);
+                        }
+                        file4.WriteLine(cipher.Answer);
+                        file4.WriteLine(Environment.NewLine);
+                        file4.WriteLine(@"-----------------------");
                     }
-                    file4.WriteLine(cipher.Answer);
-                    file4.WriteLine(Environment.NewLine);
-                    file4.WriteLine(@"-----------------------");
                 }
+                return "Print successfull";
+            }
+            else 
+            {
+                return "No ciphers to print";
             }
         }
 

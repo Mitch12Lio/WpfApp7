@@ -103,8 +103,7 @@ namespace WpfApp7.ViewModels
             try
             {
                 string dateGuid = DateTime.Now.ToString("yyyy.MM.dd.HH.mm.ss.ffff");
-                TroveVM.PrintCipherList(GlobalLogLocation + Path.DirectorySeparatorChar + "EasterHunt_" + dateGuid + ".txt");
-                StatusMessage = "Print Successfull";
+                StatusMessage = TroveVM.PrintCipherList(GlobalLogLocation + Path.DirectorySeparatorChar + "EasterHunt_" + dateGuid + ".txt");
             }
             catch (Exception ex)
             {

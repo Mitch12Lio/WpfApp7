@@ -27,6 +27,7 @@ namespace WpfApp7.ViewModels
 
             }
         }
+
         #endregion
 
         #region Properties
@@ -40,11 +41,9 @@ namespace WpfApp7.ViewModels
             }
             set
             {
-
                 answer = value;
                 DivulgeAnswer();
                 OnPropertyChanged(nameof(Answer));
-
             }
         }
 
@@ -98,11 +97,10 @@ namespace WpfApp7.ViewModels
                             }
                         }
                     }
-                    catch (Exception ex)
+                    catch (Exception)
                     {
-                        int xw = 0;
-                    }
-                    int x = 0;
+                        throw;
+                    }                   
                 }
                 else
                 {

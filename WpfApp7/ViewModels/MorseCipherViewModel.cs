@@ -12,7 +12,6 @@ namespace WpfApp7.ViewModels
         #region Properties
 
         Dictionary<char, String>? morseDictionary = null;
-
         public Dictionary<char, String>? MorseDictionary
         {
             get
@@ -21,13 +20,10 @@ namespace WpfApp7.ViewModels
             }
             set
             {
-
                 morseDictionary = value;               
                 OnPropertyChanged(nameof(MorseDictionary));
-
             }
         }
-
 
         private String answer = String.Empty;
         public override String Answer
@@ -38,11 +34,9 @@ namespace WpfApp7.ViewModels
             }
             set
             {
-
                 answer = value;
                 GetAssociatedString(value);
                 OnPropertyChanged(nameof(Answer));
-
             }
         }
 
@@ -67,9 +61,7 @@ namespace WpfApp7.ViewModels
             MorseDictionary = Utilities.Algorithms.CreateMorseDictionary();
         }
 
-        #region Methods
-
-      
+        #region Methods      
 
         private void GetAssociatedString(string answer)
         {
@@ -78,8 +70,6 @@ namespace WpfApp7.ViewModels
             {
                 Hint += GetRelatedString(c) + " ";
             }
-
-            //return answer;
         }
 
         private string GetRelatedString(char c)
