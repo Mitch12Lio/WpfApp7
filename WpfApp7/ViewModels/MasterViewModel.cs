@@ -169,6 +169,24 @@ namespace WpfApp7.ViewModels
             TroveVM.UpdateAtbash();
         }
 
+        private ICommand? clearAtbashCommand;
+        public ICommand ClearAtbashCommand
+        {
+            get
+            {
+                if (clearAtbashCommand == null)
+                {
+                    clearAtbashCommand = new RelayCommand(param => ClearAtbash());
+                }
+                return clearAtbashCommand;
+            }
+        }
+
+        public void ClearAtbash()
+        {
+            TroveVM.ClearAtbashFields();
+        }
+
         #endregion
 
         #region Morse
@@ -208,6 +226,23 @@ namespace WpfApp7.ViewModels
             TroveVM.UpdateMorse();
         }
 
+        private ICommand? clearMorseCommand;
+        public ICommand ClearMorseCommand
+        {
+            get
+            {
+                if (clearMorseCommand == null)
+                {
+                    clearMorseCommand = new RelayCommand(param => ClearMorse());
+                }
+                return clearMorseCommand;
+            }
+        }
+
+        public void ClearMorse()
+        {
+            TroveVM.ClearMorseFields();
+        }
 
         #endregion
 
@@ -247,6 +282,24 @@ namespace WpfApp7.ViewModels
         public void UpdatePolybius()
         {
             TroveVM.UpdatePolybius();
+        }
+
+        private ICommand? clearPolybiusCommand;
+        public ICommand ClearPolybiusCommand
+        {
+            get
+            {
+                if (clearPolybiusCommand == null)
+                {
+                    clearPolybiusCommand = new RelayCommand(param => ClearPolybius());
+                }
+                return clearPolybiusCommand;
+            }
+        }
+
+        public void ClearPolybius()
+        {
+            TroveVM.ClearPolybiusFields();
         }
 
         #endregion

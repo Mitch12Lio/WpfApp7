@@ -291,7 +291,6 @@
                                                 <Button Grid.Column="0" Grid.Row="0" Content="Add" Visibility="{Binding TroveVM.AtbashVM.VisibilityAddButton}" Command="{Binding AddAtbashCommand}"></Button>
                                                 <Button Grid.Column="0" Grid.Row="0" Content="Update" Visibility="{Binding TroveVM.AtbashVM.VisibilityUpdateButton}" Command="{Binding UpdateAtbashCommand}"></Button>
                                                 <Button Grid.Column="1" Grid.Row="0" Content="Clear" Command="{Binding ClearAtbashCommand}"></Button>
-
                                             </Grid>
                                         </Grid>
                                     </DockPanel>

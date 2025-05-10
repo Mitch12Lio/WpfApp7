@@ -206,7 +206,7 @@ namespace WpfApp7.ViewModels
                 {
                     IsPolybiusTabSelected = true;
                     currentVM = PolybiusVM;
-                }                
+                }
                 ViewLogic(selectedCipher, currentVM);
                 SelectedLocation = selectedCipher.CipherLocation;
                 SelectedEggColour = selectedCipher.EggColour;
@@ -233,6 +233,7 @@ namespace WpfApp7.ViewModels
             }
 
         }
+
         private void ViewLogic(Cipher selectedCipher, CipherViewModel cipherVM)
         {
             cipherVM.Answer = selectedCipher.Answer;
@@ -240,7 +241,7 @@ namespace WpfApp7.ViewModels
             cipherVM.VisibilityAddButton = Utilities.VisibilityTypes.Hidden.ToString();
             cipherVM.VisibilityUpdateButton = Utilities.VisibilityTypes.Visible.ToString();
         }
-      
+
         public void PrintCipherList(string path)
         {
             string dateGuid = DateTime.Now.ToString("yyyy.MM.dd.HH.mm.ss.ffff");
@@ -294,11 +295,7 @@ namespace WpfApp7.ViewModels
             newCipher.EggColour = SelectedEggColour;
 
             Ciphers.Add(newCipher);
-
-            viewModel.Answer = string.Empty;
-            viewModel.Hint = string.Empty;
-            SelectedLocation = null;
-            SelectedEggColour = null;
+            Clear(viewModel);
             CountCiphers();
         }
 
@@ -308,11 +305,20 @@ namespace WpfApp7.ViewModels
             cipher.Hint = viewModel.Hint;
             cipher.CipherType = viewModel.CipherType;
             cipher.CipherLocation = SelectedLocation;
-            cipher.EggColour= SelectedEggColour;
+            cipher.EggColour = SelectedEggColour;
 
         }
 
+        private void Clear(CipherViewModel viewModel)
+        {
+            viewModel.Answer = string.Empty;
+            viewModel.Hint = string.Empty;
+            SelectedLocation = null;
+            SelectedEggColour = null;
+        }
+
         #region Atbash
+
         public void AddAtbash()
         {
             Add(new AtbashCipher(), AtbashVM);
@@ -324,6 +330,11 @@ namespace WpfApp7.ViewModels
             {
                 Update(SelectedCipher, AtbashVM);
             }
+        }
+
+        public void ClearAtbashFields()
+        {
+            Clear(AtbashVM);
         }
 
         #endregion
@@ -342,9 +353,15 @@ namespace WpfApp7.ViewModels
             }
         }
 
+        public void ClearMorseFields()
+        {
+            Clear(MorseVM);
+        }
+
         #endregion
 
         #region Polybius
+
         public void AddPolybius()
         {
             Add(new PolybiusCipher(), PolybiusVM);
@@ -356,6 +373,11 @@ namespace WpfApp7.ViewModels
             {
                 Update(SelectedCipher, PolybiusVM);
             }
+        }
+
+        public void ClearPolybiusFields()
+        {
+            Clear(PolybiusVM);
         }
 
         #endregion
