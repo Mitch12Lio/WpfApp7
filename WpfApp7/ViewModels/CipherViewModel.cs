@@ -16,10 +16,7 @@ namespace WpfApp7.ViewModels
 {   
     public abstract class CipherViewModel : ObservableObject
     {       
-        protected CipherViewModel()
-        {            
-           
-        }    
+
 
         #region Properties
 
@@ -51,7 +48,7 @@ namespace WpfApp7.ViewModels
             }
         }
 
-        public virtual String Answer { get; set; }
+        public virtual String Answer { get; set; }= String.Empty;
       
         private String hint = String.Empty;
 
@@ -72,42 +69,42 @@ namespace WpfApp7.ViewModels
 
         public abstract String CipherType { get; set; }
 
-        public virtual CipherLocation Location { get; set; }
+        public virtual CipherLocation? Location { get; set; }
 
         #endregion
 
         #region Validation
 
-        Dictionary<string, List<string>> Errors = new Dictionary<string, List<string>>();
-        public bool HasErrors => Errors.Count > 0;      
+        //Dictionary<string, List<string>> Errors = new Dictionary<string, List<string>>();
+        //public bool HasErrors => Errors.Count > 0;      
 
-        public event EventHandler<DataErrorsChangedEventArgs>? ErrorsChanged;
-        public IEnumerable GetErrors(string? propertyName)
-        {
-            if (Errors.ContainsKey(propertyName))
-            {
-                return Errors[propertyName];
-            }
-            else { return Enumerable.Empty<string>(); }
-        }
+        //public event EventHandler<DataErrorsChangedEventArgs>? ErrorsChanged;
+        //public IEnumerable GetErrors(string? propertyName)
+        //{
+        //    if (Errors.ContainsKey(propertyName))
+        //    {
+        //        return Errors[propertyName];
+        //    }
+        //    else { return Enumerable.Empty<string>(); }
+        //}
 
-        public void Validate(string propertyName, object propertyValue)
-        {
-            var results = new List<ValidationResult>();
-            Validator.TryValidateProperty(propertyValue, new ValidationContext(this) { MemberName = propertyName }, results);
-            if (results.Any())
-            {
-                Errors.Add(propertyName, results.Select(r => r.ErrorMessage).ToList());
-                ErrorsChanged?.Invoke(this, new DataErrorsChangedEventArgs(propertyName));
-            }
-            else
-            {
-                Errors.Remove(propertyName);
-                ErrorsChanged?.Invoke(this, new DataErrorsChangedEventArgs(propertyName));
-            }
+        //public void Validate(string propertyName, object propertyValue)
+        //{
+        //    var results = new List<ValidationResult>();
+        //    Validator.TryValidateProperty(propertyValue, new ValidationContext(this) { MemberName = propertyName }, results);
+        //    if (results.Any())
+        //    {
+        //        Errors.Add(propertyName, [.. results.Select(r => r.ErrorMessage)]);
+        //        ErrorsChanged?.Invoke(this, new DataErrorsChangedEventArgs(propertyName));
+        //    }
+        //    else
+        //    {
+        //        Errors.Remove(propertyName);
+        //        ErrorsChanged?.Invoke(this, new DataErrorsChangedEventArgs(propertyName));
+        //    }
 
-            //SubmitCommand.RaiseCanExecuteChanged();
-        }
+        //    //SubmitCommand.RaiseCanExecuteChanged();
+        //}
 
         #endregion
 

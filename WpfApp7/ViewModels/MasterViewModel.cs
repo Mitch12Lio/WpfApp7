@@ -346,8 +346,8 @@ namespace WpfApp7.ViewModels
             }
         }
 
-        private ICommand openWindowsExplorerCommand;
-        public ICommand OpenWindowsExplorerCommand
+        private ICommand? openWindowsExplorerCommand;
+        public ICommand? OpenWindowsExplorerCommand
         {
             get
             {
@@ -471,36 +471,6 @@ namespace WpfApp7.ViewModels
                     StatusMessage = location + " does not exists.";
                 }
             }
-        }
-
-        private bool CheckExistance(string path)
-        {
-            bool okay2Go = false;
-            FileAttributes attr = System.IO.File.GetAttributes(path);
-
-            if (attr.HasFlag(FileAttributes.Directory))
-            {
-                if (Directory.Exists(path))
-                {
-                    okay2Go = true;
-                }
-            }
-            else //File
-            {
-                if (System.IO.File.Exists(path))
-                {
-                    string directoryName = Path.GetDirectoryName(path);
-                    if (directoryName != null)
-                    {
-                        if (directoryName != string.Empty)
-                        {
-                            okay2Go = true;
-                        }
-                    }
-                }
-            }
-
-            return okay2Go;
         }
 
         public void SetSave(object obj)

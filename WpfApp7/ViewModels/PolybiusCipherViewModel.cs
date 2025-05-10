@@ -70,53 +70,53 @@ namespace WpfApp7.ViewModels
 
         private void DivulgeAnswer()
         {
-            Hint = string.Empty;
-
-            foreach (char character in Answer)
+            if ((PolybiusDT != null))
             {
-                if ((character >= 'A' && character < 'Y') || (character >= 'a' && character < 'y'))
+                Hint = string.Empty;
+
+                foreach (char character in Answer)
                 {
-                    bool characterFound = false;
-                    try
+                    if ((character >= 'A' && character < 'Y') || (character >= 'a' && character < 'y'))
                     {
-                        foreach (System.Data.DataRow dr in PolybiusDT.Rows)
-                        {                            
-                            for (int y = 1; y < PolybiusDT.Columns.Count; y++)
+                        bool characterFound = false;
+                        try
+                        {
+                            foreach (System.Data.DataRow dr in PolybiusDT.Rows)
                             {
-                                Char currentDTChar = Convert.ToChar(dr[y]);
-                                if (currentDTChar == Char.ToUpper(character))
+                                for (int y = 1; y < PolybiusDT.Columns.Count; y++)
                                 {
-                                    Hint += PolybiusDT.Columns[y].ColumnName + ":" + (PolybiusDT.Rows.IndexOf(dr) + 1).ToString() + " ";
-                                    characterFound = true;
+                                    Char currentDTChar = Convert.ToChar(dr[y]);
+                                    if (currentDTChar == Char.ToUpper(character))
+                                    {
+                                        Hint += PolybiusDT.Columns[y].ColumnName + ":" + (PolybiusDT.Rows.IndexOf(dr) + 1).ToString() + " ";
+                                        characterFound = true;
+                                        break;
+                                    }
+                                }
+                                if (characterFound)
+                                {
                                     break;
                                 }
                             }
-                            if (characterFound)
-                            {
-                                break;
-                            }
+                        }
+                        catch (Exception)
+                        {
+                            throw;
                         }
                     }
-                    catch (Exception)
+                    else
                     {
-                        throw;
-                    }                   
-                }
-                else
-                {
-                    if (character == 'z')
-                    {
-                        Hint += "Z ";
-                    }
-                    else 
-                    {
-                        Hint += character.ToString() + " ";
+                        if (character == 'z')
+                        {
+                            Hint += "Z ";
+                        }
+                        else
+                        {
+                            Hint += character.ToString() + " ";
+                        }
                     }
                 }
             }
-
         }
     }
-
-
 }
