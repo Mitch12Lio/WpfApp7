@@ -20,6 +20,7 @@ namespace WpfApp7.ViewModels
         public PolybiusCipherViewModel PolybiusVM { get; private set; }
 
         #region Properties
+
         #region Egg Colours Properties
 
         private System.Collections.ObjectModel.ObservableCollection<EggColour> eggColours = new System.Collections.ObjectModel.ObservableCollection<EggColour>();
@@ -51,6 +52,7 @@ namespace WpfApp7.ViewModels
         }
 
         #endregion
+
         #region Location Properties
 
         private System.Collections.ObjectModel.ObservableCollection<CipherLocation> cipherLocations = new System.Collections.ObjectModel.ObservableCollection<CipherLocation>();
@@ -144,6 +146,7 @@ namespace WpfApp7.ViewModels
             }
 
         }
+
         private System.Collections.ObjectModel.ObservableCollection<Cipher> ciphers = new System.Collections.ObjectModel.ObservableCollection<Cipher>();
         public System.Collections.ObjectModel.ObservableCollection<Cipher> Ciphers
         {
@@ -294,6 +297,8 @@ namespace WpfApp7.ViewModels
 
         #endregion
 
+        #region General VMs
+
         private void Add(Cipher newCipher, CipherViewModel viewModel)
         {
             newCipher.Answer = viewModel.Answer;
@@ -324,6 +329,8 @@ namespace WpfApp7.ViewModels
             SelectedLocation = null;
             SelectedEggColour = null;
         }
+
+        #endregion
 
         #region Atbash
 
@@ -414,9 +421,7 @@ namespace WpfApp7.ViewModels
             EggColours.Add(new EggColour { Colour = Utilities.EggColours.Orange.ToString() });
         }
 
-
         #endregion
-
 
     }
 }

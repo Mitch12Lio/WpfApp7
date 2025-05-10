@@ -13,36 +13,13 @@ using WpfApp7.Models;
 using WpfApp7.MVVM;
 
 namespace WpfApp7.ViewModels
-{
-    //public interface ICipherCryptograph
-    //{
-    //    public void Encrypt();
-    //}
-    //public class AtbashCryptograph : ICipherCryptograph
-    //{
-    //    public void Encrypt()
-    //    {
-    //        throw new NotImplementedException();
-    //    }
-    //}
-
-    //public class MorseCryptograph : ICipherCryptograph
-    //{
-    //    public void Encrypt()
-    //    {
-    //        throw new NotImplementedException();
-    //    }
-    //}
-
+{   
     public abstract class CipherViewModel : ObservableObject
-    {
-       
+    {       
         protected CipherViewModel()
-        {
-            int x = 0;
+        {            
            
-        }
-     
+        }    
 
         #region Properties
 
@@ -74,28 +51,8 @@ namespace WpfApp7.ViewModels
             }
         }
 
-
         public virtual String Answer { get; set; }
-
-        //[Required(ErrorMessage = "Answer is Required")]
-        //public virtual String Answer
-        //{
-        //    get
-        //    {
-        //        return answer;
-        //    }
-        //    set
-        //    {
-
-        //        answer = value;
-        //        Validate(nameof(Answer), value);
-        //        //OnPropertyChanged(nameof(Answer));
-
-        //    }
-        //}
-
-
-        
+      
         private String hint = String.Empty;
 
         [Required(ErrorMessage = "Cipher is Required")]
@@ -107,11 +64,9 @@ namespace WpfApp7.ViewModels
             }
             set
             {
-
                 hint = value;
                 //Validate(nameof(Hint), value);
                 OnPropertyChanged(nameof(Hint));
-
             }
         }
 
@@ -121,53 +76,10 @@ namespace WpfApp7.ViewModels
 
         #endregion
 
-
-
-
-
-
-
-
-
-        //public string Error
-        //{
-        //    get { return null; }
-        //}
-
-        //public string this[string columnName]
-        //{
-        //    get
-        //    {
-        //        string result = null;
-        //        if (columnName == "Answer")
-        //        {
-        //            if (string.IsNullOrEmpty(Answer))
-        //                result = "Please enter an Answer";
-        //        }
-        //        if (columnName == "Hint")
-        //        {
-        //            if (string.IsNullOrEmpty(Hint))
-        //                result = "Please enter a Cipher";
-        //        }
-               
-        //        return result;
-        //    }
-        //}
-
-
-
-
-
-
-
-
-
         #region Validation
 
         Dictionary<string, List<string>> Errors = new Dictionary<string, List<string>>();
-        public bool HasErrors => Errors.Count > 0;
-
-      
+        public bool HasErrors => Errors.Count > 0;      
 
         public event EventHandler<DataErrorsChangedEventArgs>? ErrorsChanged;
         public IEnumerable GetErrors(string? propertyName)

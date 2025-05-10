@@ -119,17 +119,7 @@ namespace WpfApp7.Utilities
                     {
                         if (charQ.Count != 0)
                         {
-                            //if (charQ.Peek() == 'Y')
-                            //{
-                            //    char yChar = charQ.Dequeue();
-                            //    string newChar = yChar.ToString() + "/Z";
-                            //    dr[dc] = newChar;
-
-                            //}
-                            //else
-                            //{
-                                dr[dc] = charQ.Dequeue();
-                            //}
+                            dr[dc] = charQ.Dequeue();
                         }
                         else
                         {
