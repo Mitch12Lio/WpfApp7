@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp7"
         mc:Ignorable="d"
-       Title="MainWindow" Height="700" Width="800">
+       Title="Easter Hunt Preparation" Height="700" Width="800">
     <DockPanel LastChildFill="True">
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="_File">
@@ -52,7 +52,7 @@
             <TabItem Header="Logs">
                 <GroupBox BorderThickness="3">
                     <GroupBox.Header>
-                        <Span FontWeight="DemiBold">Global Results/Log/DB Location</Span>
+                        <Span FontWeight="DemiBold">Global Prints and Logs</Span>
                     </GroupBox.Header>
                     <StackPanel>
                         <TextBox Text="{Binding GlobalLogLocation}"></TextBox>
@@ -69,55 +69,9 @@
                         </Grid>
                     </StackPanel>
                 </GroupBox>
-            </TabItem>
-            <TabItem Header="Login (N/A)">
-                <GroupBox BorderThickness="3">
-                    <GroupBox.Header>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="*"/>
-                            </Grid.RowDefinitions>
-                            <Label Grid.Row="0" Grid.Column="0" Content="Logged In:" FontWeight="DemiBold"></Label>
-                            <TextBlock Grid.Row="0" Grid.Column="1" FontSize="10" VerticalAlignment="Center">
-                   <!--<Run Text="("></Run>-->
-                   <Run Text="{Binding LoggedIn}"></Run>
-                   <!--<Run Text=")"></Run>-->
-                            </TextBlock>
-                        </Grid>
-                    </GroupBox.Header>
-                    <StackPanel>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="*"/>
-                                <RowDefinition Height="*"/>
-                                <RowDefinition Height="*"/>
-                            </Grid.RowDefinitions>
-                            <Label Grid.Row="0" Grid.Column="0" Content="Username"></Label>
-                            <TextBox Grid.Row="1" Grid.Column="0" Text="{Binding Username}"></TextBox>
-                            <Label Grid.Row="0" Grid.Column="1" Content="Password"></Label>
-                            <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Password}"></TextBox>
-                            <Label Grid.Row="0" Grid.Column="2" Content="Email (for registration)"></Label>
-                            <TextBox Grid.Row="1" Grid.Column="2" Text="{Binding Email}"></TextBox>
-                            <Button Grid.Row="2" Grid.Column="0" Content="Login" Command="{Binding LoginCommand}"></Button>
-                            <Button Grid.Row="2" Grid.Column="1" Content="Register" Command="{Binding RegisterCommand}"></Button>
-                            <Button Grid.Row="2" Grid.Column="2" Content="Logout" Command="{Binding LogoutCommand}"></Button>
-                        </Grid>
-                    </StackPanel>
-                </GroupBox>
-            </TabItem>
+            </TabItem>          
         </TabControl>
-
         <TabControl>
-
             <TabItem Header="Set Up">
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -303,13 +257,10 @@
                                             </Grid.RowDefinitions>
                                             <StackPanel Grid.Column="0" Grid.Row="0">
                                                 <Label Content="Answer"></Label>
-                                                <!--<TextBox Text="{Binding TroveVM.AtbashVM.Answer,UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnDataErrors=True}"></TextBox>-->
-                                                <TextBox Text="{Binding TroveVM.AtbashVM.Answer,UpdateSourceTrigger=PropertyChanged}" ToolTip="{Binding RelativeSource={RelativeSource Mode=Self},Path=(Validation.Errors)[0].ErrorContent }"></TextBox>
-                                                
+                                                <TextBox Text="{Binding Path=TroveVM.AtbashVM.Answer,UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=True,NotifyOnValidationError=True}"></TextBox>
                                                 <Label Content="Cipher"></Label>
                                                 <TextBox x:Name="HintTextbox" Text="{Binding TroveVM.AtbashVM.Hint,UpdateSourceTrigger=PropertyChanged}"></TextBox>
                                                 <Label Content="{Binding ElementName=HintTextbox,Path=(Validation.Errors)[0].ErrorContent}" Foreground="Red"></Label>
-
                                                 <Grid>
                                                     <Grid.ColumnDefinitions>
                                                         <ColumnDefinition Width="*" />
@@ -333,7 +284,6 @@
                                                 <Grid.ColumnDefinitions>
                                                     <ColumnDefinition Width="*" />
                                                     <ColumnDefinition Width="*" />
-                                                    <!--<ColumnDefinition Width="*" />-->
                                                 </Grid.ColumnDefinitions>
                                                 <Grid.RowDefinitions>
                                                     <RowDefinition Height="*"/>
@@ -341,7 +291,7 @@
                                                 <Button Grid.Column="0" Grid.Row="0" Content="Add" Visibility="{Binding TroveVM.AtbashVM.VisibilityAddButton}" Command="{Binding AddAtbashCommand}"></Button>
                                                 <Button Grid.Column="0" Grid.Row="0" Content="Update" Visibility="{Binding TroveVM.AtbashVM.VisibilityUpdateButton}" Command="{Binding UpdateAtbashCommand}"></Button>
                                                 <Button Grid.Column="1" Grid.Row="0" Content="Clear" Command="{Binding ClearAtbashCommand}"></Button>
-                                                
+
                                             </Grid>
                                         </Grid>
                                     </DockPanel>
@@ -530,16 +480,7 @@
                     </TabControl>
                 </Grid>
 
-            </TabItem>
-            <TabItem Header="Master">
-
-            </TabItem>
-            <TabItem Header="Print">
-
-            </TabItem>
-            <TabItem Header="Help">
-
-            </TabItem>
+            </TabItem>           
         </TabControl>
     </DockPanel>
 </Window>

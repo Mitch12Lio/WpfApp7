@@ -34,7 +34,7 @@ namespace WpfApp7.ViewModels
     //    }
     //}
 
-    public abstract class CipherViewModel : ObservableObject,INotifyDataErrorInfo
+    public abstract class CipherViewModel : ObservableObject
     {
        
         protected CipherViewModel()
@@ -121,10 +121,53 @@ namespace WpfApp7.ViewModels
 
         #endregion
 
+
+
+
+
+
+
+
+
+        //public string Error
+        //{
+        //    get { return null; }
+        //}
+
+        //public string this[string columnName]
+        //{
+        //    get
+        //    {
+        //        string result = null;
+        //        if (columnName == "Answer")
+        //        {
+        //            if (string.IsNullOrEmpty(Answer))
+        //                result = "Please enter an Answer";
+        //        }
+        //        if (columnName == "Hint")
+        //        {
+        //            if (string.IsNullOrEmpty(Hint))
+        //                result = "Please enter a Cipher";
+        //        }
+               
+        //        return result;
+        //    }
+        //}
+
+
+
+
+
+
+
+
+
         #region Validation
 
         Dictionary<string, List<string>> Errors = new Dictionary<string, List<string>>();
         public bool HasErrors => Errors.Count > 0;
+
+      
 
         public event EventHandler<DataErrorsChangedEventArgs>? ErrorsChanged;
         public IEnumerable GetErrors(string? propertyName)

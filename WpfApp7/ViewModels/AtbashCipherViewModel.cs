@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Transactions;
 using System.Windows.Navigation;
 using WpfApp7.Models;
 
@@ -61,34 +62,6 @@ namespace WpfApp7.ViewModels
             }
         }
 
-        //private string visibilityAddButton = Utilities.VisibilityTypes.Visible.ToString();
-        //public string VisibilityAddButton
-        //{
-        //    get
-        //    {
-        //        return visibilityAddButton;
-        //    }
-        //    set
-        //    {
-        //        visibilityAddButton = value;
-        //        OnPropertyChanged(nameof(VisibilityAddButton));
-        //    }
-        //}
-
-        //private string visibilityUpdateButton = Utilities.VisibilityTypes.Hidden.ToString();
-        //public string VisibilityUpdateButton
-        //{
-        //    get
-        //    {
-        //        return visibilityUpdateButton;
-        //    }
-        //    set
-        //    {
-        //        visibilityUpdateButton = value;
-        //        OnPropertyChanged(nameof(VisibilityUpdateButton));
-        //    }
-        //}
-
         #endregion
 
         public AtbashCipherViewModel()
@@ -99,6 +72,7 @@ namespace WpfApp7.ViewModels
         }
 
         #region Methods
+
         private void GetAssociatedLetter(string answer)
         {
             Hint = String.Empty;

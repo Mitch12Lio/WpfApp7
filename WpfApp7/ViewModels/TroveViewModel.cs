@@ -84,6 +84,7 @@ namespace WpfApp7.ViewModels
         #endregion
 
         #region Tabs
+
         private bool isAtbashTabSelected = true;
         public bool IsAtbashTabSelected
         {
@@ -168,61 +169,13 @@ namespace WpfApp7.ViewModels
             set
             {
                 selectedCipher = value;
-
                 TabLogic(selectedCipher);
-                #region old logic
-                //if (value != null)
-                //{
-                //    if (value.GetType() == typeof(AtbashCipher))
-                //    {
-                //        IsAtbashTabSelected = true;
-                //        AtbashVM.Answer = value.Answer;
-                //        AtbashVM.Hint = value.Hint;
-                //        AtbashVM.VisibilityAddButton = "Hidden";
-                //        AtbashVM.VisibilityUpdateButton = "Visible";
-
-                //    }
-                //    else if (value.GetType() == typeof(MorseCipher))
-                //    {
-                //        IsMorseTabSelected = true;
-                //        MorseVM.Answer = value.Answer;
-                //        MorseVM.Hint = value.Hint;
-                //        MorseVM.VisibilityAddButton = "Hidden";
-                //        MorseVM.VisibilityUpdateButton = "Visible";
-
-                //    }
-                //    else if (value.GetType() == typeof(PolybiusCipher))
-                //    {
-                //        IsPolybiusTabSelected = true;
-                //        PolybiusVM.Answer = value.Answer;
-                //        PolybiusVM.Hint = value.Hint;
-                //        PolybiusVM.VisibilityAddButton = "Hidden";
-                //        PolybiusVM.VisibilityUpdateButton = "Visible";
-                //    }
-                //    SelectedLocation = value.CipherLocation;
-                //}
-                //else
-                //{
-                //    AtbashVM.Answer = string.Empty;
-                //    AtbashVM.Hint = string.Empty;
-                //    AtbashVM.VisibilityAddButton = Utilities.VisibilityTypes.Visible.ToString();
-                //    AtbashVM.VisibilityUpdateButton = Utilities.VisibilityTypes.Hidden.ToString();
-                //    MorseVM.Answer = string.Empty;
-                //    MorseVM.Hint = string.Empty;
-                //    MorseVM.VisibilityAddButton = Utilities.VisibilityTypes.Visible.ToString();
-                //    MorseVM.VisibilityUpdateButton = Utilities.VisibilityTypes.Hidden.ToString();
-                //    PolybiusVM.Answer = string.Empty;
-                //    PolybiusVM.Hint = string.Empty;
-                //    PolybiusVM.VisibilityAddButton = Utilities.VisibilityTypes.Visible.ToString();
-                //    PolybiusVM.VisibilityUpdateButton = Utilities.VisibilityTypes.Hidden.ToString();
-                //    SelectedLocation = null;
-                //}
-                #endregion
                 OnPropertyChanged(nameof(SelectedCipher));
             }
         }
 
         #endregion
+
         public TroveViewModel()
         {
             AtbashVM = new AtbashCipherViewModel();
@@ -243,21 +196,16 @@ namespace WpfApp7.ViewModels
                 {
                     IsAtbashTabSelected = true;
                     currentVM = AtbashVM;
-                    //ViewLogic(selectedCipher, AtbashVM);
-
                 }
                 else if (selectedCipher.GetType() == typeof(MorseCipher))
                 {
                     IsMorseTabSelected = true;
                     currentVM = MorseVM;
-                    //ViewLogic(selectedCipher, MorseVM);
                 }
-                //else if (selectedCipher.GetType() == typeof(PolybiusCipher))
                 else
                 {
                     IsPolybiusTabSelected = true;
                     currentVM = PolybiusVM;
-                    //ViewLogic(selectedCipher, PolybiusVM);
                 }                
                 ViewLogic(selectedCipher, currentVM);
                 SelectedLocation = selectedCipher.CipherLocation;
@@ -291,7 +239,6 @@ namespace WpfApp7.ViewModels
             cipherVM.Hint = selectedCipher.Hint;
             cipherVM.VisibilityAddButton = Utilities.VisibilityTypes.Hidden.ToString();
             cipherVM.VisibilityUpdateButton = Utilities.VisibilityTypes.Visible.ToString();
-
         }
       
         public void PrintCipherList(string path)
@@ -315,6 +262,7 @@ namespace WpfApp7.ViewModels
                 }
             }
         }
+
         public void Remove()
         {
             if (SelectedCipher != null)
@@ -323,12 +271,12 @@ namespace WpfApp7.ViewModels
                 CountCiphers();
             }
         }
+
         public void Clear()
         {
             Ciphers.Clear();
             CountCiphers();
         }
-
 
         private void CountCiphers()
         {
@@ -336,6 +284,7 @@ namespace WpfApp7.ViewModels
         }
 
         #endregion
+
         private void Add(Cipher newCipher, CipherViewModel viewModel)
         {
             newCipher.Answer = viewModel.Answer;
@@ -347,11 +296,10 @@ namespace WpfApp7.ViewModels
             Ciphers.Add(newCipher);
 
             viewModel.Answer = string.Empty;
-            //viewModel.Hint = string.Empty;
+            viewModel.Hint = string.Empty;
             SelectedLocation = null;
             SelectedEggColour = null;
             CountCiphers();
-
         }
 
         private void Update(Cipher cipher, CipherViewModel viewModel)
@@ -368,11 +316,6 @@ namespace WpfApp7.ViewModels
         public void AddAtbash()
         {
             Add(new AtbashCipher(), AtbashVM);
-
-            //Cipher newAtbashCipher = new AtbashCipher { Id = 0, Answer = AtbashVM.Answer, Hint = AtbashVM.Hint, CipherLocation = SelectedLocation, CipherType = AtbashVM.CipherType };
-            //Ciphers.Add(newAtbashCipher);
-            //AtbashVM.Answer = String.Empty;
-            //AtbashVM.Hint = String.Empty;
         }
 
         public void UpdateAtbash()
@@ -380,10 +323,6 @@ namespace WpfApp7.ViewModels
             if (SelectedCipher != null)
             {
                 Update(SelectedCipher, AtbashVM);
-                //SelectedCipher.Answer = AtbashVM.Answer;
-                //SelectedCipher.Hint = AtbashVM.Hint;
-                //SelectedCipher.CipherType = AtbashVM.CipherType;
-                //SelectedCipher.CipherLocation = SelectedLocation;
             }
         }
 
@@ -393,11 +332,6 @@ namespace WpfApp7.ViewModels
         public void AddMorse()
         {
             Add(new MorseCipher(), MorseVM);
-
-            //Cipher newMorseCipher = new MorseCipher { Id = 0, Answer = MorseVM.Answer, Hint = MorseVM.Hint, CipherLocation = SelectedLocation, CipherType = MorseVM.CipherType };
-            //Ciphers.Add(newMorseCipher);
-            //MorseVM.Answer = String.Empty;
-            //MorseVM.Hint = String.Empty;
         }
 
         public void UpdateMorse()
@@ -405,10 +339,6 @@ namespace WpfApp7.ViewModels
             if (SelectedCipher != null)
             {
                 Update(SelectedCipher, MorseVM);
-                //SelectedCipher.Answer = MorseVM.Answer;
-                //SelectedCipher.Hint = MorseVM.Hint;
-                //SelectedCipher.CipherType = MorseVM.CipherType;
-                //SelectedCipher.CipherLocation = SelectedLocation;
             }
         }
 
@@ -418,11 +348,6 @@ namespace WpfApp7.ViewModels
         public void AddPolybius()
         {
             Add(new PolybiusCipher(), PolybiusVM);
-
-            //Cipher newPolybiusCipher = new PolybiusCipher { Id = 0, Answer = PolybiusVM.Answer, Hint = PolybiusVM.Hint,CipherLocation=SelectedLocation, CipherType = PolybiusVM.CipherType };
-            //Ciphers.Add(newPolybiusCipher);
-            //PolybiusVM.Answer = String.Empty;
-            //PolybiusVM.Hint = String.Empty;
         }
 
         public void UpdatePolybius()
@@ -430,10 +355,6 @@ namespace WpfApp7.ViewModels
             if (SelectedCipher != null)
             {
                 Update(SelectedCipher, PolybiusVM);
-                //SelectedCipher.Answer = PolybiusVM.Answer;
-                //SelectedCipher.Hint = PolybiusVM.Hint;
-                //SelectedCipher.CipherType = PolybiusVM.CipherType;
-                //SelectedCipher.CipherLocation = SelectedLocation;
             }
         }
 

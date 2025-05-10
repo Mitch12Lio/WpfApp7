@@ -15,8 +15,6 @@ namespace WpfApp7.ViewModels
     public class MasterViewModel:ObservableObject
     {
         public TroveViewModel TroveVM { get; private set; }
-        //public AtbashCipherViewModel AtbashVM { get; private set; }
-
 
         #region Global Properties       
 
@@ -61,14 +59,12 @@ namespace WpfApp7.ViewModels
         public MasterViewModel()
         {
             TroveVM = new TroveViewModel();
-            //AtbashVM = new AtbashCipherViewModel(TroveVM);
 
             SetSaveCommand = new RelayCommand(SetSave, param => true);
             SetFileCommand = new RelayCommand(SetFile, param => true);
             SetFolderCommand = new RelayCommand(SetFolder, param => true);
             OpenWindowsExplorerCommand = new RelayCommand(OpenWindowsExplorer, param => true);
 
-            //AddPlusValidateAtbashCommand = new ActionCommand(AddPlusValidateAtbash, CanAdd);
         }
 
         #region Throve
@@ -108,6 +104,7 @@ namespace WpfApp7.ViewModels
             {
                 string dateGuid = DateTime.Now.ToString("yyyy.MM.dd.HH.mm.ss.ffff");
                 TroveVM.PrintCipherList(GlobalLogLocation + Path.DirectorySeparatorChar + "EasterHunt_" + dateGuid + ".txt");
+                StatusMessage = "Print Successfull";
             }
             catch (Exception ex)
             {
@@ -370,7 +367,6 @@ namespace WpfApp7.ViewModels
             {
                 if (folderBrowserDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 {
-                    //string pathName = openFD.FileName;
                     string pathName = folderBrowserDialog.SelectedPath;
                     switch (obj.ToString())
                     {
@@ -387,7 +383,6 @@ namespace WpfApp7.ViewModels
 
         public void OpenWindowsExplorer(object obj)
         {
-            //bool exit = false;
             switch (obj.ToString())
             {
                 case "GlobalLogLocation":
@@ -461,8 +456,6 @@ namespace WpfApp7.ViewModels
             bool exit = false;
             Microsoft.Win32.SaveFileDialog saveFD = new Microsoft.Win32.SaveFileDialog();
             saveFD.CheckPathExists = true;
-            //saveFD.DefaultExt = "csv";
-            //saveFD.Filter = "csv files (*.csv)|*.csv|All files (*.*)|*.*";
 
             switch (obj.ToString())
             {
