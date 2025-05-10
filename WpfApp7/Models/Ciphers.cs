@@ -8,32 +8,6 @@ using WpfApp7.MVVM;
 
 namespace WpfApp7.Models
 {
-
-    public interface ICipherCryptograph
-    {
-        public string Encrypt();
-        //public Dictionary<char,char> GetDictionary();
-    }
-    public class AtbashCryptograph : ICipherCryptograph
-    {
-        public string Encrypt()
-        {
-            return "Atbash";
-        }
-        //public Dictionary<char, char> GetDictionary()
-        //{
-        //    return new Dictionary<char, char>();
-        //}
-    }
-
-    public class MorseCryptograph : ICipherCryptograph
-    {
-        public string Encrypt()
-        {
-            return "Morse";
-        }
-    }
-
     public abstract class Cipher : ObservableObject
     {
         protected Cipher()
@@ -51,7 +25,6 @@ namespace WpfApp7.Models
 
         //perhaps creating DTO's will solve the problem of having MVVM included in models?
 
-
         private string hint = string.Empty;
         public string Hint
         {
@@ -63,11 +36,8 @@ namespace WpfApp7.Models
             {
                 hint = value;
                 OnPropertyChanged(nameof(Hint));
-
             }
         }
-
-
 
         private string answer = string.Empty;
 
@@ -83,7 +53,6 @@ namespace WpfApp7.Models
                 answer = value;
                 //Validate(nameof(Answer), value);
                 OnPropertyChanged(nameof(Answer));
-
             }
         }
 
@@ -96,10 +65,8 @@ namespace WpfApp7.Models
             }
             set
             {
-                cipherType = value;
-                
+                cipherType = value;                
                 OnPropertyChanged(nameof(CipherType));
-
             }
         }
 
@@ -114,7 +81,6 @@ namespace WpfApp7.Models
             {
                 cipherLocation = value;
                 OnPropertyChanged(nameof(CipherLocation));
-
             }
         }
 
@@ -144,15 +110,6 @@ namespace WpfApp7.Models
         //public CipherLocation? CipherLocation { get; set; } = null;
 
         public abstract string ExecuteAnswer();
-
-
-        public ICipherCryptograph? iCipherCryptograph;
-
-        public string? performCrypto()
-        {
-            return iCipherCryptograph?.Encrypt();
-        }
-
     }
 
     public class CipherLocation()
@@ -168,59 +125,38 @@ namespace WpfApp7.Models
     }
 
     public class AtbashCipher : Cipher
-    {
-        public AtbashCipher()
-        {
-            iCipherCryptograph = new AtbashCryptograph();
-        }
-
-
+    {      
         public override string ExecuteAnswer()
         {
-            return "Encrypting Atbash";
-
+            return string.Empty;
         }
-
     }
 
     public class CeasarCipher : Cipher
     {
-
-
         public override string ExecuteAnswer()
         {
-            return "Encrypting Ceasar";
-
+            return string.Empty;
         }
-
-
     }
 
     public class MorseCipher : Cipher
     {
         public MorseCipher()
         {
-            iCipherCryptograph = new MorseCryptograph();
+          
         }
-
         public override string ExecuteAnswer()
         {
             return "Encrypting Morse";
-
         }
-
     }
     public class PolybiusCipher : Cipher
     {
-
-
         public override string ExecuteAnswer()
         {
             return "Encrypting Polybius";
-
         }
-
-
     }
 
 }
