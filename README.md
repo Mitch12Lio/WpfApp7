@@ -23,6 +23,9 @@ Windows and the .Net Runtime
 + Implement a participant module.
 + Implement a validation system.
 
+## License
 
+This project is licensed under the Michel Girard Consulting Inc. License - see the LICENSE.md file for details.
+[License](LICENSE.md)
 
 

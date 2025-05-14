@@ -26,7 +26,7 @@ Windows and the .Net Runtime
 ## License
 
 This project is licensed under the Michel Girard Consulting Inc. License - see the LICENSE.md file for details.
-[License]((/WpfApp7/LICENSE.md))
+[License](LICENSE.md)
 
 
 
