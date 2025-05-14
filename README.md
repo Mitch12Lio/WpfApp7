@@ -2,6 +2,9 @@
 # Cipher Treasure Hunt
 Easily and quickly encrypt clues using one of the ciphers' available for a game or hunt.
 
+## Technologies
+WPF MVVM C#
+
 ## Description
 Every easter we have a Treasure Hunt.
 
