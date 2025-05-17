@@ -206,6 +206,7 @@
                     <TabControl Grid.Column="0" Grid.Row="2">
                         <TabItem Header="Atbash" Selector.IsSelected="{Binding TroveVM.IsAtbashTabSelected}">
                             <TabControl>
+                                
                                 <TabItem Header="Add/Update">
                                     <DockPanel LastChildFill="True">
                                         <Grid DockPanel.Dock="Right">
