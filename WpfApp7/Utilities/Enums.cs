@@ -33,4 +33,12 @@ namespace WpfApp7.Utilities
         public const string Other = "Other";
 
     }
+
+    struct StatusMessages
+    {
+        public const string Ready = "Ready!";
+        public const string AnAnswerIsRequired = "An answer is required.";
+        public const string PrintedAt = "Printed at ";
+        public const string NoCiphersToPrint = "No ciphers to print.";
+    }
 }

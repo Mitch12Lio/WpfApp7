@@ -267,11 +267,11 @@ namespace WpfApp7.ViewModels
                         file4.WriteLine(@"-----------------------");
                     }
                 }
-                return "Print successfull";
+                return Utilities.StatusMessages.PrintedAt + path;
             }
             else 
             {
-                return "No ciphers to print";
+                return Utilities.StatusMessages.NoCiphersToPrint;
             }
         }
 

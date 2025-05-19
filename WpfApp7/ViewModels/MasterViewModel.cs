@@ -83,6 +83,7 @@ namespace WpfApp7.ViewModels
         }
         public void RemoveCipher()
         {
+            StatusMessage = Utilities.StatusMessages.Ready;
             TroveVM.Remove();
         }
 
@@ -100,6 +101,7 @@ namespace WpfApp7.ViewModels
         }
         public void PrintCipherList()
         {
+            StatusMessage = Utilities.StatusMessages.Ready;
             try
             {
                 string dateGuid = DateTime.Now.ToString("yyyy.MM.dd.HH.mm.ss.ffff");
@@ -126,6 +128,7 @@ namespace WpfApp7.ViewModels
         }
         public void ClearCiphers()
         {
+            StatusMessage = Utilities.StatusMessages.Ready;
             TroveVM.Clear();
         }
 
@@ -147,7 +150,10 @@ namespace WpfApp7.ViewModels
         }
         public void AddAtbash()
         {
-            TroveVM.AddAtbash();
+            if (Validate(TroveVM.AtbashVM.Answer))
+            {
+                TroveVM.AddAtbash();
+            }          
         }
 
         private ICommand? updateAtbashCommand;
@@ -165,7 +171,10 @@ namespace WpfApp7.ViewModels
 
         public void UpdateAtbash()
         {
-            TroveVM.UpdateAtbash();
+            if (Validate(TroveVM.AtbashVM.Answer))
+            {
+                TroveVM.UpdateAtbash();
+            }
         }
 
         private ICommand? clearAtbashCommand;
@@ -183,6 +192,7 @@ namespace WpfApp7.ViewModels
 
         public void ClearAtbash()
         {
+            StatusMessage = Utilities.StatusMessages.Ready;
             TroveVM.ClearAtbashFields();
         }
 
@@ -204,7 +214,10 @@ namespace WpfApp7.ViewModels
         }
         public void AddMorse()
         {
-            TroveVM.AddMorse();
+            if (Validate(TroveVM.MorseVM.Answer))
+            {
+                TroveVM.AddMorse();
+            }
         }
 
         private ICommand? updateMorseCommand;
@@ -222,7 +235,10 @@ namespace WpfApp7.ViewModels
 
         public void UpdateMorse()
         {
-            TroveVM.UpdateMorse();
+            if (Validate(TroveVM.MorseVM.Answer))
+            {
+                TroveVM.UpdateMorse();
+            }
         }
 
         private ICommand? clearMorseCommand;
@@ -240,6 +256,7 @@ namespace WpfApp7.ViewModels
 
         public void ClearMorse()
         {
+            StatusMessage = Utilities.StatusMessages.Ready;
             TroveVM.ClearMorseFields();
         }
 
@@ -261,7 +278,10 @@ namespace WpfApp7.ViewModels
         }
         public void AddPolybius()
         {
-            TroveVM.AddPolybius();
+            if (Validate(TroveVM.PolybiusVM.Answer))
+            {
+                TroveVM.AddPolybius();
+            }
            
         }
         private ICommand? updatePolybiusCommand;
@@ -280,7 +300,10 @@ namespace WpfApp7.ViewModels
 
         public void UpdatePolybius()
         {
-            TroveVM.UpdatePolybius();
+            if (Validate(TroveVM.PolybiusVM.Answer))
+            {
+                TroveVM.UpdatePolybius();
+            }
         }
 
         private ICommand? clearPolybiusCommand;
@@ -298,6 +321,7 @@ namespace WpfApp7.ViewModels
 
         public void ClearPolybius()
         {
+            StatusMessage = Utilities.StatusMessages.Ready;
             TroveVM.ClearPolybiusFields();
         }
 
@@ -519,6 +543,25 @@ namespace WpfApp7.ViewModels
             }
         }
 
+
+        #endregion
+
+        #region Validate
+
+        private bool Validate(string answer) 
+        {
+            if (String.IsNullOrWhiteSpace(answer))
+            {
+                StatusMessage = Utilities.StatusMessages.AnAnswerIsRequired;
+                return false;
+            }
+            else 
+            { 
+                StatusMessage = Utilities.StatusMessages.Ready;
+                return true;
+            }
+        
+        }
 
         #endregion
     }
